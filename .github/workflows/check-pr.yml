@@ -1,0 +1,30 @@
+name: Build and check formatting on pull request
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Set up node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Check code formatting
+        run: npm run lint
+        
+      - name: Build
+        run: npm run build

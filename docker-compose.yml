@@ -1,0 +1,15 @@
+# docker-compose up --build
+
+version: '0.1.0'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: notes-app
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
